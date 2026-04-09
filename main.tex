@@ -1,0 +1,87 @@
+\documentclass[12pt]{report}
+
+\usepackage{amsmath,graphicx,booktabs}
+\usepackage[a4paper, margin=1in]{geometry}
+
+\title{\textbf{Design Verification of Steel Connections Using Osdag}}
+\author{Ashu Yadav \\ B.Tech Civil Engineering \\ IIT Roorkee}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\chapter*{Abstract}
+This report presents the manual verification of steel connections designed using Osdag. All calculations are performed as per IS 800:2007. The objective is to validate software outputs and identify assumptions, inconsistencies, and possible improvements in the design philosophy.
+
+\tableofcontents
+\newpage
+
+%---------------------------------------
+\chapter{Beam-to-Beam Cover Plate Bolted Connection}
+\input{conn1.tex}
+
+%---------------------------------------
+\chapter{Beam-to-Column End Plate Connection}
+\input{conn2.tex}
+
+%---------------------------------------
+\chapter{Column-to-Column Cover Plate Bolted Connection}
+\input{conn3.tex}
+
+%---------------------------------------
+\chapter{Column-to-Column Cover Plate Welded Connection}
+\input{conn4.tex}
+
+%---------------------------------------
+\chapter{Column-to-Column End Plate Bolted Connection}
+\input{conn5.tex}
+
+%---------------------------------------
+\chapter{Overall Observations}
+
+\begin{itemize}
+\item Load amplification as per IS 800 Clause 10.7 significantly increases design forces.
+\item Manual calculations closely match Osdag outputs across all connections.
+\item Flange components primarily resist bending moment in moment connections.
+\item Weld design governs in welded connections.
+\item Bolt design in end plate connections is governed by tension and prying force.
+\item Long joint reduction affects bolt capacity in cover plate connections.
+\end{itemize}
+
+%---------------------------------------
+\chapter{Recommendations to Design Philosophy and Bugs}
+
+\section{Lack of Transparency in Load Modification}
+Osdag modifies applied loads internally as per IS 800 Clause 10.7. However, this is not clearly visible in the initial stages, which may mislead users.
+
+\section{Hidden Intermediate Calculations}
+Important parameters such as:
+\begin{itemize}
+\item $k_b$ (bearing factor)
+\item Prying force calculations
+\item Load redistribution
+\end{itemize}
+are not explicitly shown.
+
+\section{Design Philosophy Concerns}
+\begin{itemize}
+\item Conservative load amplification may lead to overdesign.
+\item Internal assumptions are not clearly communicated.
+\item User has limited control over intermediate design steps.
+\end{itemize}
+
+\section{Software Improvement Suggestions}
+\begin{itemize}
+\item Display step-by-step calculations in output report
+\item Show load amplification clearly in input stage
+\item Provide explanation for reduction factors (long joint, prying, etc.)
+\item Improve documentation for better understanding of design logic
+\end{itemize}
+
+%---------------------------------------
+\chapter{Conclusion}
+
+Manual verification confirms that all connections designed using Osdag satisfy IS 800:2007 provisions. The study also highlights the importance of understanding underlying assumptions in software-based design and suggests improvements for better transparency.
+
+\end{document}

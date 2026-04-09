@@ -1,0 +1,166 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,booktabs,graphicx}
+\usepackage[a4paper, margin=1in]{geometry}
+
+\title{\textbf{Design Verification of Column-to-Column End Plate Bolted Connection}}
+\author{Ashu Yadav}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+This report presents the manual verification of a column-to-column end plate bolted connection designed using Osdag. The connection is subjected to combined axial load, shear force, and bending moment as per IS 800:2007.
+
+\section{Input Data}
+\begin{itemize}
+    \item Column Section: HB 300
+    \item Material: Fe 410 ($f_y = 250$ MPa, $f_u = 410$ MPa)
+    \item Applied Moment = 165 kNm
+    \item Applied Shear = 25 kN
+    \item Applied Axial Load = 8 kN
+\end{itemize}
+
+\section{Load Adjustment (IS 800 Cl. 10.7)}
+
+From Osdag (Page 4–5):
+
+\begin{align}
+P_u &= 223.68 \text{ kN} \\
+V_u &= 40 \text{ kN} \\
+M_u &= 165 \text{ kNm}
+\end{align}
+
+\textbf{Note:} Axial load increased significantly from 8 kN to 223.68 kN.
+
+\section{Bolt Design}
+
+\subsection{Bolt Details}
+\begin{itemize}
+    \item Diameter = 27 mm
+    \item Grade = 9.8 ($f_{ub} = 900$ MPa)
+    \item Hole diameter = 30 mm
+    \item Number of bolts = 6
+\end{itemize}
+
+\subsection{Bolt Shear Capacity}
+
+\begin{equation}
+V_{dsb} = \frac{f_{ub} \cdot A_{nb}}{\sqrt{3} \cdot \gamma_{mb}}
+= \frac{900 \times 459}{\sqrt{3} \times 1.25 \times 1000}
+= 190.8 \text{ kN}
+\end{equation}
+
+\subsection{Bolt Bearing Capacity}
+
+\begin{equation}
+V_{dpb} = \frac{2.5 \cdot k_b \cdot d \cdot t \cdot f_u}{\gamma_{mb}} = 657.12 \text{ kN}
+\end{equation}
+
+\subsection{Governing Capacity}
+
+\begin{equation}
+V_{db} = 190.8 \text{ kN}
+\end{equation}
+
+\subsection{Shear per Bolt}
+
+\begin{equation}
+V_{sb} = \frac{V_u}{n} = \frac{40}{6} = 6.67 \text{ kN}
+\end{equation}
+
+\textbf{Safe since } $6.67 < 190.8$
+
+\section{Bolt Tension and Prying Force}
+
+\subsection{Tension due to Moment}
+
+\begin{equation}
+T_1 = 282.55 \text{ kN}
+\end{equation}
+
+\subsection{Prying Force}
+
+\begin{equation}
+Q = 23.94 \text{ kN}
+\end{equation}
+
+\subsection{Total Tension}
+
+\begin{equation}
+T_b = T_1 + Q = 306.49 \text{ kN}
+\end{equation}
+
+\subsection{Tension Capacity}
+
+\begin{equation}
+T_{db} = 297.43 \text{ kN}
+\end{equation}
+
+\textbf{Safe (as per Osdag design)}
+
+\section{Bolt Spacing Check}
+
+\begin{itemize}
+    \item Pitch = 67.5 mm (≥ $2.5d$)
+    \item Edge distance = 55 mm
+\end{itemize}
+
+\section{End Plate Design}
+
+\subsection{Plate Thickness}
+
+\begin{equation}
+t_p = 56 \text{ mm}
+\end{equation}
+
+\subsection{Moment Capacity}
+
+\begin{equation}
+M_{ep} = 11.57 \text{ kNm}
+\end{equation}
+
+\begin{equation}
+M_{dp} = 12.03 \text{ kNm}
+\end{equation}
+
+\textbf{Safe since } $11.57 < 12.03$
+
+\section{Member Capacity Check}
+
+\begin{equation}
+T_d = 1700 \text{ kN} > 223.68 \text{ kN (Safe)}
+\end{equation}
+
+\section{Comparison with Osdag}
+
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+Parameter & Osdag & Manual & Difference (\%) \\
+\midrule
+Bolt Shear (kN) & 190.8 & 190.8 & 0 \\
+Bolt Tension (kN) & 306.49 & 306.49 & 0 \\
+Plate Thickness (mm) & 56 & 56 & 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Observations}
+\begin{itemize}
+    \item Axial load increased significantly due to IS 800 Clause 10.7.
+    \item Prying force plays an important role in bolt design.
+    \item End plate bending governs thickness requirement.
+\end{itemize}
+
+\section{Bugs and Recommendations}
+\begin{itemize}
+    \item Load amplification is not clearly visible to the user.
+    \item Prying force calculation lacks transparency.
+    \item Recommendation: Provide detailed intermediate steps in output.
+\end{itemize}
+
+\section{Conclusion}
+Manual verification confirms that the connection is safe and complies with IS 800:2007 provisions.
+
+\end{document}

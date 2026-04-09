@@ -1,0 +1,157 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,booktabs,graphicx}
+\usepackage[a4paper, margin=1in]{geometry}
+
+\title{\textbf{Design Verification of Column-to-Column Cover Plate Bolted Connection}}
+\author{Ashu Yadav}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+This report presents the manual verification of a column-to-column cover plate bolted connection designed using Osdag. The verification is carried out as per IS 800:2007 provisions.
+
+\section{Input Data}
+\begin{itemize}
+    \item Column Section: HB 400
+    \item Material: Fe 410 ($f_y = 250$ MPa, $f_u = 410$ MPa)
+    \item Applied Moment = 20 kNm
+    \item Applied Shear = 10 kN
+    \item Applied Axial Load = 5 kN
+\end{itemize}
+
+\section{Load Adjustment (IS 800 Cl. 10.7)}
+
+\begin{align}
+P_u &= 672.27 \text{ kN} \\
+V_u &= 40 \text{ kN} \\
+M_u &= 177.27 \text{ kNm}
+\end{align}
+
+\textbf{Note:} Loads are significantly increased as per IS 800 minimum design requirements.
+
+\section{Force Distribution}
+
+\begin{itemize}
+    \item Flange Force = 580.52 kN
+    \item Web Force = 232.42 kN
+\end{itemize}
+
+\section{Flange Bolt Design}
+
+\subsection{Bolt Properties}
+\begin{itemize}
+    \item Diameter = 22 mm
+    \item Grade = 3.6 ($f_{ub} = 330$ MPa)
+    \item Net Area = 303 mm$^2$
+\end{itemize}
+
+\subsection{Shear Capacity}
+
+\begin{equation}
+V_{dsb} = \frac{f_{ub} \cdot A_{nb}}{\sqrt{3} \cdot \gamma_{mb}}
+= \frac{330 \times 303}{\sqrt{3} \times 1.25 \times 1000}
+= 46.18 \text{ kN}
+\end{equation}
+
+\subsection{Bearing Capacity}
+
+\begin{equation}
+V_{dpb} = \frac{2.5 \cdot k_b \cdot d \cdot t \cdot f_u}{\gamma_{mb}} = 116.85 \text{ kN}
+\end{equation}
+
+\subsection{Governing Capacity}
+
+\begin{equation}
+V_{db} = 46.18 \text{ kN}
+\end{equation}
+
+\subsection{Long Joint Reduction}
+
+\begin{equation}
+V_{rd} = 0.9 \times 46.18 = 41.57 \text{ kN}
+\end{equation}
+
+\section{Flange Bolt Force Check}
+
+\begin{equation}
+V_{res} = 41.47 \text{ kN}
+\end{equation}
+
+\textbf{Since } $V_{res} < V_{rd}$, design is safe.
+
+\section{Web Bolt Design}
+
+\subsection{Bolt Capacity}
+
+\begin{equation}
+V_{db} = 83.72 \text{ kN}
+\end{equation}
+
+\subsection{Resultant Force}
+
+\begin{equation}
+V_{res} = 75.87 \text{ kN}
+\end{equation}
+
+\textbf{Safe since } $75.87 < 83.72$
+
+\section{Plate Design}
+
+\subsection{Flange Plate}
+\begin{itemize}
+    \item Thickness = 14 mm
+    \item Area = 3500 mm$^2$ (Safe)
+\end{itemize}
+
+\subsection{Web Plate}
+\begin{itemize}
+    \item Thickness = 8 mm
+    \item Area = 4080 mm$^2$ (Safe)
+\end{itemize}
+
+\section{Member Capacity Check}
+
+\subsection{Flange}
+\begin{equation}
+T_d = 721.59 \text{ kN} > 580.52 \text{ kN (Safe)}
+\end{equation}
+
+\subsection{Web}
+\begin{equation}
+T_d = 729.0 \text{ kN} > 232.42 \text{ kN (Safe)}
+\end{equation}
+
+\section{Comparison with Osdag}
+
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+Parameter & Osdag & Manual & Difference (\%) \\
+\midrule
+Bolt Capacity (kN) & 46.18 & 46.18 & 0 \\
+Flange Force (kN) & 580.52 & 580.52 & 0 \\
+Web Force (kN) & 232.42 & 232.42 & 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Observations}
+\begin{itemize}
+    \item Significant increase in design loads due to IS 800 Clause 10.7.
+    \item Flange carries majority of moment.
+    \item Long joint reduction affects bolt capacity.
+\end{itemize}
+
+\section{Bugs and Recommendations}
+\begin{itemize}
+    \item Load amplification is not clearly visible in initial inputs.
+    \item Reduction factors are applied internally without explanation.
+    \item Recommendation: Improve transparency in intermediate calculations.
+\end{itemize}
+
+\section{Conclusion}
+Manual verification confirms that the Osdag design is accurate and complies with IS 800:2007 provisions. The connection is safe under combined loading.
+
+\end{document}

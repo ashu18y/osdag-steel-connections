@@ -1,0 +1,177 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,booktabs,graphicx}
+\usepackage[a4paper, margin=1in]{geometry}
+
+\title{\textbf{Design Verification of Column-to-Column Cover Plate Welded Connection}}
+\author{Ashu Yadav}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+This report presents the manual verification of a column-to-column cover plate welded connection designed using Osdag. The connection is subjected to combined axial force, shear force, and bending moment as per IS 800:2007.
+
+\section{Input Data}
+\begin{itemize}
+    \item Column Section: HB 450
+    \item Material: Fe 410 ($f_y = 250$ MPa, $f_u = 410$ MPa)
+    \item Applied Moment = 10 kNm
+    \item Applied Shear = 10 kN
+    \item Applied Axial Load = 0 kN
+\end{itemize}
+
+\section{Load Adjustment (IS 800 Cl. 10.7)}
+
+From Osdag (Page 4–5):
+
+\begin{align}
+P_u &= 756.82 \text{ kN} \\
+V_u &= 40 \text{ kN} \\
+M_u &= 221.59 \text{ kNm}
+\end{align}
+
+\textbf{Note:} Loads are increased significantly as per minimum design requirements.
+
+\section{Force Distribution}
+
+From Page 5–6:
+
+\begin{itemize}
+    \item Web Force = 282.37 kN
+    \item Flange Force = 627.45 kN
+\end{itemize}
+
+\section{Flange Weld Design}
+
+\subsection{Weld Size Limits}
+
+\begin{itemize}
+    \item Minimum weld size = 5 mm
+    \item Maximum weld size = 13.7 mm
+    \item Provided weld = 12 mm
+\end{itemize}
+
+\subsection{Throat Thickness}
+
+\begin{equation}
+t_t = 0.7 \times 12 = 8.4 \text{ mm}
+\end{equation}
+
+\subsection{Effective Length}
+
+\begin{equation}
+l_{eff} = 695 \text{ mm}
+\end{equation}
+
+\subsection{Weld Stress}
+
+\begin{equation}
+\text{Stress} = \frac{F_f}{l_{eff}} = \frac{627.45 \times 10^3}{695} = 906.72 \text{ N/mm}
+\end{equation}
+
+\subsection{Weld Strength}
+
+\begin{equation}
+f_w = \frac{t_t \cdot f_u}{\sqrt{3} \cdot \gamma_{mw}}
+= \frac{8.4 \times 410}{\sqrt{3} \times 1.25}
+= 1590.72 \text{ N/mm}
+\end{equation}
+
+\textbf{Safe since } $906.72 < 1590.72$
+
+\section{Web Weld Design}
+
+\subsection{Weld Size}
+
+\begin{itemize}
+    \item Provided weld = 8 mm
+    \item Throat thickness = 5.6 mm
+\end{itemize}
+
+\subsection{Effective Length}
+
+\begin{equation}
+l_{eff} = 595 \text{ mm}
+\end{equation}
+
+\subsection{Resultant Weld Stress}
+
+From Page 10:
+
+\begin{equation}
+R_w = 522.3 \text{ N/mm}
+\end{equation}
+
+\subsection{Weld Strength}
+
+\begin{equation}
+f_w = \frac{5.6 \times 410}{\sqrt{3} \times 1.25} = 1060.48 \text{ N/mm}
+\end{equation}
+
+\textbf{Safe since } $522.3 < 1060.48$
+
+\section{Plate Design}
+
+\subsection{Flange Plate}
+
+\begin{itemize}
+    \item Width = 215 mm
+    \item Thickness = 18 mm
+    \item Area = 3870 mm$^2$ (Safe)
+\end{itemize}
+
+\subsection{Web Plate}
+
+\begin{itemize}
+    \item Height = 360 mm
+    \item Thickness = 10 mm
+    \item Area = 7200 mm$^2$ (Safe)
+\end{itemize}
+
+\section{Member Capacity Check}
+
+\subsection{Flange}
+
+\begin{equation}
+T_d = 778.41 \text{ kN} > 627.45 \text{ kN (Safe)}
+\end{equation}
+
+\subsection{Web}
+
+\begin{equation}
+T_d = 941.25 \text{ kN} > 282.37 \text{ kN (Safe)}
+\end{equation}
+
+\section{Comparison with Osdag}
+
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+Parameter & Osdag & Manual & Difference (\%) \\
+\midrule
+Flange Force (kN) & 627.45 & 627.45 & 0 \\
+Web Force (kN) & 282.37 & 282.37 & 0 \\
+Flange Weld Stress & 906.72 & 906.72 & 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Observations}
+\begin{itemize}
+    \item Significant load amplification observed due to IS 800 Clause 10.7.
+    \item Weld design governs the connection behavior.
+    \item Flange carries major portion of moment.
+\end{itemize}
+
+\section{Bugs and Recommendations}
+\begin{itemize}
+    \item Load modification is not explicitly shown in initial stage.
+    \item Weld stress distribution assumptions are not clearly explained.
+    \item Recommendation: Provide intermediate weld force calculations in output.
+\end{itemize}
+
+\section{Conclusion}
+Manual verification confirms that the welded connection design is safe and complies with IS 800:2007 provisions.
+
+\end{document}
